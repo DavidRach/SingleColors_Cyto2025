@@ -31,7 +31,7 @@ removestrings <-  c("(Cells)", ".fcs", " ")
 
 Locate the fcs files
 ```{r}
-File_Location <- "data"
+File_Location <- "/home/david/Desktop/data2"
 FCS_Pattern <- ".fcs$"
 FCS_Files <- list.files(path = File_Location, pattern = FCS_Pattern,
                         full.names = TRUE, recursive = FALSE)
@@ -264,14 +264,28 @@ Dimmest <- APCFire810_10to20 |> select(-Sample)
 
 HotspotBrightest <- Luciernaga:::MagesCauldron(panelfluors=MyPanel,
      unstained=UnstainedSignatureInput, swapname="APC-Fire 810",
-     swapvalue=Brightest, returnType="data")
+     swapvalue=Brightest, returnType="data", outpath=StorageLocation,
+     savePlot=TRUE, filename="BrightHotspot")
 
 HotspotDimmest <- Luciernaga:::MagesCauldron(panelfluors=MyPanel,
      unstained=UnstainedSignatureInput, swapname="APC-Fire 810",
-     swapvalue=Dimmest, returnType="data")
+     swapvalue=Dimmest, returnType="data", savePlot=TRUE, 
+     outpath=StorageLocation, filename="DimHotspot")
 
 Difference <- Luciernaga:::TailOfANewt(HotspotBrighter=HotspotBrightest,
- HotspotDimmer=HotspotDimmest, savePlot=TRUE)
+ HotspotDimmer=HotspotDimmest,
+ savePlot=TRUE, filename="HotspotDifference",
+ outpath=StorageLocation)
+
+ HotspotBrightest <- Luciernaga:::MagesCauldron(panelfluors=MyPanel,
+     unstained=UnstainedSignatureInput, swapname="APC-Fire 810",
+     swapvalue=Brightest, returnType="plot", outpath=StorageLocation,
+     savePlot=TRUE, filename="BrightHotspot")
+
+HotspotDimmest <- Luciernaga:::MagesCauldron(panelfluors=MyPanel,
+     unstained=UnstainedSignatureInput, swapname="APC-Fire 810",
+     swapvalue=Dimmest, returnType="plot", savePlot=TRUE, 
+     outpath=StorageLocation, filename="DimHotspot")
 ```
 
 ```{r}
