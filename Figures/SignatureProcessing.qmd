@@ -242,9 +242,9 @@ ContaminationSignature[1]
 Amalgamated <- NormalizedSliceData |> mutate(Count=1) |> relocate(Count, .after=Percentiles)
 
 Plot <- QC_Amalgamate(data=Amalgamated, samplecolumn="Percentiles",
- countcolumn="Count", returnType="plot", titlename=NULL, linecolor="blue", legend=TRUE)
+ countcolumn="Count", returnType="plot", titlename=NULL, linecolor="blue", legend=FALSE)
 
-Plot
+plotly::ggplotly(Plot)
 ```
 
 # Hotspot Spreading
