@@ -36,6 +36,7 @@ FilesForUnmixing <- list.files(FullStainLocation, pattern="fcs",
 UnmixCytoSet <- load_cytoset_from_fcs(FilesForUnmixing[1],
  truncate_max_range = FALSE, transform = FALSE) # NY071_New/Ctrl.fcs
 UnmixGatingSet <- GatingSet(UnmixCytoSet)
+colnames(UnmixGatingSet)
 ```
 
 ```{r}
