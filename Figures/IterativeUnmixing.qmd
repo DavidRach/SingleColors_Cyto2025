@@ -41,7 +41,7 @@ colnames(UnmixGatingSet)
 
 ```{r}
 IterativePath <- file.path(StorageLocation, "PE")
-StringRemoval <- c(".fcs", "DR_CD161 BV480 ", "(Cells)_")
+StringRemoval <- c(".fcs", "NKG2DPE_", "(Cells)_")
 TheSampleName <- c("GUID") 
 
 BV480Signatures <- Luciernaga_FolderSignatures(
