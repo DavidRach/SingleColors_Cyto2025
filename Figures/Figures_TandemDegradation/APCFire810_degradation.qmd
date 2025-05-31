@@ -52,9 +52,25 @@ ggsave(filename = FinalLocation, LinePlot, dpi = 600, width = 4, height = 3)
 ```
 
 ```{r}
-Brightnesses <- Luciernaga_FolderBrightness(FolderPath=Location, sample.name="GUID", StringRemoval=StringRemoval, fluorophore.name="", Verbose=TRUE, PanelCuts=c(0.5,1))
+Brightnesses <- Luciernaga_FolderBrightness(FolderPath=Location, 
+    sample.name="GUID", StringRemoval=StringRemoval,
+    fluorophore.name="APC-Fire 810", detector="R8-A",
+    Verbose=TRUE, PanelCuts=c(0.5,1), legend="none",
+    returnType="plot", maxtik=1e6)
 
-colnames(Brightnesses)
-nrow(Brightnesses)
+FileName <- paste0("DegradingSignaturesBrightnessR8", ".png")
+FinalLocation <- file.path(StorageLocation, FileName)
+ggsave(filename = FinalLocation, LinePlot, dpi = 600, width = 4, height = 3)
+
+
+Brightnesses <- Luciernaga_FolderBrightness(FolderPath=Location, 
+    sample.name="GUID", StringRemoval=StringRemoval,
+    fluorophore.name="APC-Fire 810", detector="R1-A",
+    Verbose=TRUE, PanelCuts=c(0.5,1), legend="none",
+    returnType="plot", maxtik=1e6)
+
+FileName <- paste0("DegradingSignaturesBrightnessR1", ".png")
+FinalLocation <- file.path(StorageLocation, FileName)
+ggsave(filename = FinalLocation, LinePlot, dpi = 600, width = 4, height = 3)
 ```
 
