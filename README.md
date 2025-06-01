@@ -1,5 +1,8 @@
 # Single Colors Cyto 2025
 
+<img src="https://github.com/DavidRach/SingleColors_Cyto2025/blob/main/SingleColorsPoster.png" >
+
+
 This repository is for our '“Well, how bright does it need to be?”: Investigating the interplay of fluorescent signature and brightness in single-color unmixing controls' poster. It contains the data and R code needed to hopefully reproduce our analysis and figures, as well as the .svg files used to create the figures in Inkscape.
 
 ## Organization
