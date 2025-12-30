@@ -1,0 +1,82 @@
+---
+title: "Brightness Decoupled"
+format: html
+---
+
+---
+title: "Iterative Unmixing Test"
+format: html
+---
+
+Due to the file sizes, we will be working locally. Please substitute your own files, thanks!
+
+```{r}
+StorageLocation <- file.path("/home/david/Desktop/Data_SCs")
+```
+
+Load required packages via the library call 
+
+```{r}
+library(flowCore)
+library(flowWorkspace)
+library(Luciernaga)
+library(dplyr)
+```
+
+Read in processed SingleColor Matrix from Sept30_AB_Unmixing.qmd experiment
+
+```{r}
+ReferencePath <- file.path("/media", "david", "David", "Sept30_AB")
+PanelPath <- file.path(ReferencePath, "TodaysNamePanel_2.csv")
+Names <- read.csv(PanelPath, check.names=FALSE)
+
+TheReferences <- list.files(ReferencePath, pattern=".csv", full.names=TRUE)
+TheSCReferences <- TheReferences[9] # UnmixingSCs_2.csv
+SingleColorReference <- read.csv(TheSCReferences, check.names=FALSE)
+
+FullStainLocation <- file.path(ReferencePath, "FullStainedSamples")
+UnmixedOutpath <- file.path(StorageLocation, "Unmixed")
+FilesForUnmixing <- list.files(FullStainLocation, pattern="fcs",
+ full.names=TRUE, recursive=TRUE)
+UnmixCytoSet <- load_cytoset_from_fcs(FilesForUnmixing[1],
+ truncate_max_range = FALSE, transform = FALSE) # NY071_New/Ctrl.fcs
+UnmixGatingSet <- GatingSet(UnmixCytoSet)
+colnames(UnmixGatingSet)
+```
+
+```{r}
+IterativePath <- file.path(StorageLocation, "PE")
+StringRemoval <- c(".fcs", "NKG2DPE_", "(Cells)_")
+TheSampleName <- c("GUID") 
+
+BV480Signatures <- Luciernaga_FolderSignatures(
+    FolderPath=StorageLocation, sample.name=TheSampleName,
+    StringRemoval=StringRemoval, fluorophore.name="PE",
+    Verbose=TRUE, PanelCuts=c(0.8,0.9))
+
+LinePlot <- QC_ViewSignature(x=NULL, data=BV480Signatures,
+ Normalize = FALSE, columnname="Sample")
+
+CosinePrelimary <- BV480Signatures |> select(-Fluorophore)
+
+CosineData <- Luciernaga_Cosine(data=CosinePrelimary,
+ returntype="plot", rearrange=TRUE)
+
+IterativePath <- BV480Signatures
+#any(SingleColorReference |> select(where(is.numeric)) > 1)
+```
+
+
+```{r}
+removestrings <- c("_Old", "_New", ".fcs")
+sample.name <- c("GROUPNAME", "TUBENAME") 
+
+Luciernaga_IterativeUnmixing(IterativePath = IterativePath, controlData=SingleColorReference,
+    FullStainedGS=UnmixGatingSet, outpath=StorageLocation, subset="root",
+    removestrings=removestrings, PanelPath=PanelPath, sample.name=sample.name, addon="90")
+```
+
+```{r}
+print("Goodbye")
+```
+
