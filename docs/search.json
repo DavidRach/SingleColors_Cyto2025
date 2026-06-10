@@ -1,0 +1,9 @@
+[
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Cyto 2026 Poster - Cytometry In R",
+    "section": "",
+    "text": "Cyto 2026 Poster - Cytometry In R\nThis is the repository for our Cyto 2026 “Cytometry in R” late-breaker poster.\nClick here to navigate to the .pdf of the poster, which can be downloaded.\nFor our Cytometry in R course, click here.\n\n\nGitHub repository organization.\nThe code to generate QR codes and extract survey comments in R can be found under the code_poster folder. Actual QR codes generated can be found under outputs folder. Images used that were brought in from other sources can be found in the images folder.\n\n\nLicense\nIn our commitment to open-science and open-source, all teaching materials are freely offered under a CC-BY-SA license, while all code examples are offered under the AGPL3-0 copyleft license."
+  }
+]

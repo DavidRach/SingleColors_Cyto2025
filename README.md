@@ -1,5 +1,7 @@
 # Single Colors Cyto 2025
 
+Click [here](/SingleColorsPoster.pdf) to navigate to the .pdf of the poster, which can be downloaded. 
+
 <img src="https://github.com/DavidRach/SingleColors_Cyto2025/blob/main/SingleColorsPoster.png" >
 
 
